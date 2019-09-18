@@ -6,8 +6,10 @@ use App\ArtikelModel;
 use App\BukuTamuModel;
 use App\GuruModel;
 use App\KategoriModel;
+use App\KontakModel;
 use App\SiswaModel;
 use App\TentangModel;
+use App\UserModel;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -88,6 +90,47 @@ class MainController extends Controller
         $data['tentang'] = $tentang[0];
 
         return view('tentang', ['data' => $data]);
+    }
+
+    public function login(Request $request){
+        $message = array();
+
+            if($request->method() == 'POST'){              
+                $user = UserModel::where('email', $request->username)->where('password', md5($request->password))->get()->first();
+                if($user != null){
+                    $message['error'] = true;
+                    $message['message'] = 'User tidak ditemukan';
+                }
+                else{
+                    $auth_token = base64_encode(str_random(40));
+                    UserModel::where('email', $request->input('email'))->update(['auth_token' => $auth_token]);;
+                    $cookie = Cookie::forever('auth_token', $auth_token);
+                    return redirect('/admin/home')->withCookie($cookie);
+                }
+            }
+        return view('login', ['message' => $message]);
+    }
+
+    public function adminhome(){
+        $bukutamu = BukuTamuModel::all();
+        $artikel = ArtikelModel::all();
+        $guru = GuruModel::all();
+        $kontak = KontakModel::all();
+        $userdata = UserModel::where('id_user', 3)->get();
+        
+        $total = array(
+            'artikel' => $artikel,
+            'guru' => $guru,
+            'kontak' => $kontak,
+            'bukutamu' => $bukutamu
+        );
+
+        $data = array(
+            'userData' => $userdata[0],
+            'total' => $total
+        );
+
+        return view('homeadmin', ['data' => $data]);
     }
 
     public function template(){
