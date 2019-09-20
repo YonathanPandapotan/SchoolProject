@@ -12,7 +12,7 @@
 <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
    <div class="tile-stats">
      <div class="icon" style="padding-top:15px"><i class="fa fa-comments-o"></i></div>
-     <div class="count"><?php echo $data['total']['bukutamu']; ?></div>
+     <div class="count"><?php echo $data['bukutamu']; ?></div>
      <h3>Buku Tamu</h3>
      <p><a href="?page=bukutamu">View Details</a></p> 
    </div>
@@ -21,7 +21,7 @@
 <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
    <div class="tile-stats">
      <div class="icon" style="padding-top:15px"><i class="fa fa-tasks"></i></div>
-     <div class="count"><?php echo $data['total']['artikel']; ?></div>
+     <div class="count"><?php echo $data['artikel']; ?></div>
      <h3>Artikel</h3>
      <p><a href="?page=artikel">View Details</a></p> 
    </div>
@@ -30,7 +30,7 @@
 <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
    <div class="tile-stats">
      <div class="icon" style="padding-top:15px"><i class="fa fa-users"></i></div>
-     <div class="count"><?php echo $data['total']['guru']; ?></div>
+     <div class="count"><?php echo $data['guru']; ?></div>
      <h3>Guru</h3>
      <p><a href="?page=guru">View Details</a></p> 
    </div>
@@ -39,7 +39,7 @@
 <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
    <div class="tile-stats">
      <div class="icon" style="padding-top:15px"><i class="fa fa-phone-square"></i></div>
-     <div class="count"><?php echo $data['total']['kontak']; ?></div>
+     <div class="count"><?php echo $data['kontak']; ?></div>
      <h3>Kontak</h3>
      <p><a href="?page=kontak">View Details</a></p> 
    </div>
@@ -62,31 +62,31 @@
               <tr>
                 <th>Nama Lengkap</th>
                 <th>:</th>
-                <th><?php echo $data['userData']['nama_lengkap']; ?></th>
+                <th>{{Session::get('nama-lengkap')}}</th>
               </tr>
 
               <tr>
                 <th>Username</th>
                 <th>:</th>
-                <th><?php echo $data['userData']['username']; ?></th>
+                <th>{{Session::get('username')}}</th>
               </tr>
 
               <tr>
                 <th>Email</th>
                 <th>:</th>
-                <th><?php echo $data['userData']['email']; ?></th>
+                <th>{{Session::get('email')}}</th>
               </tr>
 
               <tr>
                 <th>No. Hp</th>
                 <th>:</th>
-                <th><?php echo $data['userData']['no_hp']; ?></th>
+                <th>{{Session::get('no_hp')}}</th>
               </tr>
 
               <tr>
                 <th>Alamat</th>
                 <th>:</th>
-                <th><?php echo $data['userData']['alamat']; ?></th>
+                <th>{{Session::get('alamat')}}</th>
               </tr>
             </tbody>
           </table>

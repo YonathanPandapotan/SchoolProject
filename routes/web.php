@@ -27,6 +27,7 @@ Route::group(['prefix' => '', 'as' => ''], function () {
     Route::get('/kontak', 'MainController@kontak');
     Route::get('/login', 'MainController@login');
     Route::post('/login', 'MainController@login');
+    Route::get('/buatsession', 'MainController@buatsession');
 });
 
 Route::group(['prefix' => '', 'as' => ''], function () {

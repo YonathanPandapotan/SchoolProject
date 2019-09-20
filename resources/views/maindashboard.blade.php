@@ -18,7 +18,7 @@
 <link href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap.min.css') }}">
 <!-- Sweet Alert -->
-<link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.css') }}">
 <!-- Custom Theme Style -->
 <link href="{{ asset('css/custom.min.css') }}" rel="stylesheet">
 
@@ -38,7 +38,8 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="resources/images/img.jpg" alt="..." class="img-circle profile_img">
+                  
+                <img src="{{ asset('images/img.jpg') }}" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
@@ -85,17 +86,18 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="resources/images/img.jpg" alt=""><?php echo $data['login']->nama_lengkap; ?>
+                    <img src="{{ asset('images/img.jpg') }}" alt=""><?php echo $login['nama_lengkap']; ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="<?php echo SITE_URL; ?>?page=user&&action=detail&&id=<?php echo $data['login']->id_user; ?>"> Profile</a></li>
+
+                    <li><a href="/admin/user/detail/<?php echo $login['id_user']; ?>"> Profile</a></li>
                     <li>
-                      <a href="<?php echo SITE_URL; ?>?page=user&&action=update&&id=<?php echo $data['login']->id_user; ?>">
+                      <a href="/admin/user/update/<?php echo $login['id_user']; ?>">
                         <span>Settings</span>
                       </a>
                     </li>
-                    <li><a href="<?php echo PATH; ?>index.php?page=login&&action=logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="/admin/login"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
               </ul>
@@ -120,18 +122,20 @@
 
 
     <!-- jquery -->
-    <script src="resources/js/jquery.min.js"></script>
+    
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
     <!-- Bootstrap -->
-    <script src="resources/js/bootstrap.min.js"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <!-- Data Table -->
-    <script src="resources/js/dataTables.bootstrap.min.js"></script>
-    <script src="resources/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
+    
     <!-- TinyMce -->
-    <script src="resources/tinymce/tinymce.min.js"></script>
+    <script src="{{ asset('tinymce/tinymce.min.js') }}"></script>
     <!-- Sweet alert Js -->
-    <script type="text/javascript" src="resources/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/sweetalert.min.js')}}"></script>
     <!-- Custom Theme Scripts -->
-    <script src="resources/js/custom.min.js"></script>
+    <script src="{{ asset('js/custom.min.js')}}"></script>
     <script type="text/javascript">
       $(document).ready(function() {
         $("#TableId").DataTable({
