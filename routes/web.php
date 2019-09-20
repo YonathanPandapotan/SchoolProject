@@ -32,6 +32,9 @@ Route::group(['prefix' => '', 'as' => ''], function () {
 
 Route::group(['prefix' => '', 'as' => ''], function () {
     Route::get('/admin/home', 'AdminController@home');
+    Route::get('/admin/bukutamu', 'AdminController@bukutamu');
+    Route::get('/admin/kategori', 'AdminController@kategoriIndex');
+    Route::get('/admin/kategori/update/{id}', 'AdminController@kategoriUpdate');
 });
 
 

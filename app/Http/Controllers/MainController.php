@@ -13,7 +13,6 @@ use App\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-
 class MainController extends Controller
 {
 
@@ -97,25 +96,29 @@ class MainController extends Controller
     public function login(Request $request){
         $message = array();
 
-            if($request->method() == 'POST'){              
-                $user = UserModel::where('email', $request->username)->where('password', md5($request->password))->get()->first();
-                if($user == null){
-                    $message['success'] = true;
-                    $message['message'] = 'User tidak ditemukan';
-                }
-                else{
-                    // $auth_token = Str::random(40);
-                    // UserModel::where('email', $request->input('email'))->update(['auth_token' => $auth_token]);;
-                    // $cookie = Cookie::forever('auth_token', $auth_token);
-                    Session::put('nama_lengkap', $user->nama_lengkap);
-                    Session::put('username', $user->username);
-                    Session::put('email', $user->email);
-                    Session::put('no_hp', $user->no_hp);
-                    Session::put('alamat', $user->alamat);
-                    Session::put('login', TRUE);
-                    return redirect('/admin/home');
-                }
+        if(Session::get('login')){
+            return redirect('/admin/home');
+        }
+
+        if($request->method() == 'POST'){              
+            $user = UserModel::where('email', $request->username)->where('password', md5($request->password))->get()->first();
+            if($user == null){
+                $message['success'] = true;
+                $message['message'] = 'User tidak ditemukan';
             }
+            else{
+                // $auth_token = Str::random(40);
+                // UserModel::where('email', $request->input('email'))->update(['auth_token' => $auth_token]);;
+                // $cookie = Cookie::forever('auth_token', $auth_token);
+                Session::put('nama_lengkap', $user->nama_lengkap);
+                Session::put('username', $user->username);
+                Session::put('email', $user->email);
+                Session::put('no_hp', $user->no_hp);
+                Session::put('alamat', $user->alamat);
+                Session::put('login', TRUE);
+                return redirect('/admin/home');
+            }
+        }
         return view('login', ['message' => $message]);
     }
 

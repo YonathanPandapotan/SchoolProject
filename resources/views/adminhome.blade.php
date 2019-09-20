@@ -1,6 +1,6 @@
 @extends('maindashboard')
 
-@section('kontent')
+@section('kontentadmin')
 <h1>Dashboard <small>Statistik Website</small></h1>
 
 <ol class="breadcrumb" style="font-size: 15px">
