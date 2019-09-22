@@ -15,6 +15,10 @@ Route::get('/', function(){
     return redirect('/home');
 });
 
+Route::get('/admin', function(){
+    return redirect('/login');
+});
+
 Route::group(['prefix' => '', 'as' => ''], function () {
     Route::get('/home', 'MainController@homePage');
     Route::get('/bukutamu', 'MainController@bukutamu');
@@ -35,6 +39,13 @@ Route::group(['prefix' => '', 'as' => ''], function () {
     Route::get('/admin/bukutamu', 'AdminController@bukutamu');
     Route::get('/admin/kategori', 'AdminController@kategoriIndex');
     Route::get('/admin/kategori/update/{id}', 'AdminController@kategoriUpdate');
+    Route::get('/admin/artikel', 'AdminController@artikelIndex');
+    Route::get('/admin/jurusan', 'AdminController@jurusanIndex');
+    Route::get('/admin/siswa', 'AdminController@siswaIndex');
+    Route::get('/admin/alumni', 'AdminController@alumniIndex');
+    Route::get('/admin/guru', 'AdminController@guruIndex');
+    Route::get('/admin/tentang', 'AdminController@tentang');
+    Route::get('/admin/kontak', 'AdminController@kontak');
 });
 
 

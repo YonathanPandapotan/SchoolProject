@@ -28,8 +28,8 @@
 					<td><?php echo $no; ?></td>
 					<td><?php echo $kategori->nama_kategori; ?></td>
 					<td>
-						<a href="/admin/kategori/update/<?php echo $kategori->id_kategori; ?>" class="btn btn-warning">Edit</a>
-						<a href="/admin/kategori/hapus/<?php echo $kategori->id_kategori; ?>" class="btn btn-danger" onclick="return confirm('Anda Yakin Ingin Menghapus Data Ini ?')">Hapus</a>
+						<a href="/admin/kategori/form/<?php echo $kategori->id_kategori; ?>" class="btn btn-warning">Edit</a>
+						<a href="/admin/kategori/delete/<?php echo $kategori->id_kategori; ?>" class="btn btn-danger" onclick="return confirm('Anda Yakin Ingin Menghapus Data Ini ?')">Hapus</a>
 					</td>
 				</tr>
 			<?php 

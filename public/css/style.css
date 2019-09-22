@@ -20,7 +20,7 @@
     url('../fonts/SegoeUI/segoeuil.ttf') format("truetype"),
     url('../fonts/SegoeUI/segoeuil.svg#web') format("svg");
     font-style:normal;font-weight:normal;
-}
+} 
 @font-face{
     font-family:"Web-Droid-Sans";
     src:url('../fonts/DroidSans/DroidSans.eot');
