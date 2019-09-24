@@ -15,7 +15,7 @@
   </li>
 </ol>
 <div class="col-xs-12">
-	<a href="<?php echo PATH; ?>?page=kategori" class="btn btn-danger" style="margin-bottom: 15px"><span class="fa fa-arrow-left"></span> Kembali</a>
+	<a href="/admin/kategori" class="btn btn-danger" style="margin-bottom: 15px"><span class="fa fa-arrow-left"></span> Kembali</a>
 </div>
 <div class="col-xs-12">
 	<?php 
@@ -39,6 +39,7 @@
 </div>
 <div class="col-xs-7">
 	<form method="post">
+		@csrf <!-- {{ csrf_field() }} -->
 		<div class="form-group">
 			<label>Nama Kategori</label>
 			<input type="text" name="kategori" class="form-control" <?php if (isset($data['kategori'])) echo "value='" . $data['kategori']->nama_kategori . "'"; ?>>

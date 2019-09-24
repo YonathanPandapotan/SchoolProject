@@ -42,7 +42,7 @@
                 <img src="{{ asset('images/img.jpg') }}" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
+                <span>Welcome, {{Session::get('nama-lengkap')}}</span>
                 {{-- <h2><?//php echo $_SESSION['login']->nama_lengkap; ?></h2> --}}
               </div>
             </div>
@@ -55,18 +55,18 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li <?php if($page == "" || $page == "home") echo 'class="active"'; ?>><a href="/admin/home"><i class="fa fa-home"></i> Home</a></li>
+                  <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/home') !== false) echo 'class="current"'; ?>><a href="/admin/home"><i class="fa fa-home"></i> Home</a></li>
                   <li><a href="../"><i class="fa fa-send"></i> Lihat Website</a></li>
-                  <li <?php if($page == "bukutamu") echo 'class="active"'; ?>><a href="/admin/bukutamu"><i class="fa fa-book"></i> Buku Tamu</a></li>
-                  <li <?php if($page == "kategori") echo 'class="active"'; ?>><a href="/admin/kategori"><i class="fa fa-fw fa-th-large"></i> Kategori Artikel </a></li>
-                  <li <?php if($page == "artikel") echo 'class="active"'; ?>><a href="/admin/artikel"><i class="fa fa-fw fa-newspaper-o"></i> Artikel</a></li>
-                  <li <?php if($page == "jurusan") echo 'class="active"'; ?>><a href="/admin/jurusan"><i class="fa fa-fw fa-graduation-cap"></i>Jurusan</a></li>
-                  <li <?php if($page == "siswa") echo 'class="active"'; ?>><a href="/admin/siswa"><i class="fa fa-fw fa-users"></i>Data Siswa</a></li>
-                  <li <?php if($page == "alumni") echo 'class="active"'; ?>><a href="/admin/alumni"><i class="fa fa-fw fa-users"></i> Data Alumni</a></li>
-                  <li <?php if($page == "guru") echo 'class="active"'; ?>><a href="/admin/guru"><i class="fa fa-fw fa-users"></i> Data Guru</a></li>
-                  <li <?php if($page == "tentang") echo 'class="active"'; ?>><a href="/admin/tentang"><i class="fa fa-fw fa-building"></i> Tentang Sekolah</a></li>
-                  <li <?php if($page == "kontak") echo 'class="active"'; ?>><a href="/admin/kontak"><i class="fa fa-fw fa-phone-square"></i> Kontak</a></li>
-                  <li <?php if($page == "user") echo 'class="active"'; ?>><a href="</admin/user"><i class="fa fa-fw fa-users"></i> Manajemen User</a></li>
+                  <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/bukutamu') !== false) echo 'class="current"'; ?>><a href="/admin/bukutamu"><i class="fa fa-book"></i> Buku Tamu</a></li>
+                  <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/kategori') !== false) echo 'class="current"'; ?>><a href="/admin/kategori"><i class="fa fa-fw fa-th-large"></i> Kategori Artikel </a></li>
+                  <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/artikel') !== false) echo 'class="current"'; ?>><a href="/admin/artikel"><i class="fa fa-fw fa-newspaper-o"></i> Artikel</a></li>
+                  <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/jurusan') !== false) echo 'class="current"'; ?>><a href="/admin/jurusan"><i class="fa fa-fw fa-graduation-cap"></i>Jurusan</a></li>
+                  <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/siswa') !== false) echo 'class="current"'; ?>><a href="/admin/siswa"><i class="fa fa-fw fa-users"></i>Data Siswa</a></li>
+                  <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/alumni') !== false) echo 'class="current"'; ?>><a href="/admin/alumni"><i class="fa fa-fw fa-users"></i> Data Alumni</a></li>
+                  <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/guru') !== false) echo 'class="current"'; ?>><a href="/admin/guru"><i class="fa fa-fw fa-users"></i> Data Guru</a></li>
+                  <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/tentang') !== false) echo 'class="current"'; ?>><a href="/admin/tentang"><i class="fa fa-fw fa-building"></i> Tentang Sekolah</a></li>
+                  <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/kontak') !== false) echo 'class="current"'; ?>><a href="/admin/kontak"><i class="fa fa-fw fa-phone-square"></i> Kontak</a></li>
+                  <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/user') !== false) echo 'class="current"'; ?>><a href="</admin/user"><i class="fa fa-fw fa-users"></i> Manajemen User</a></li>
                 </ul>
               </div>
 

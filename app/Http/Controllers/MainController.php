@@ -118,6 +118,11 @@ class MainController extends Controller
                 // $auth_token = Str::random(40);
                 // UserModel::where('email', $request->username)->update(['auth_token' => $auth_token]);;
                 // $cookie = Cookie::make('auth_token', $auth_token, 10);
+                $request->session()->put('nama-lengkap', $user->nama_lengkap);
+                $request->session()->put('username', $user->username);
+                $request->session()->put('email', $user->email);
+                $request->session()->put('no_hp', $user->no_hp);
+                $request->session()->put('alamat', $user->alamat);
                 $request->session()->put('login', 'true');
                 return redirect('/admin/home');
             }

@@ -40,13 +40,38 @@ Route::group(['prefix' => '', 'as' => ''], function () {
 Route::group(['prefix' => '', 'as' => ''], function () {
     Route::get('/admin/home', 'AdminController@home');
     Route::get('/admin/bukutamu', 'AdminController@bukutamu');
+
     Route::get('/admin/kategori', 'AdminController@kategoriIndex');
-    Route::get('/admin/kategori/update/{id}', 'AdminController@kategoriUpdate');
+    Route::get('/admin/kategori/form', 'AdminController@kategoriForm');
+    Route::get('/admin/kategori/form/{id}', 'AdminController@kategoriForm');
+    Route::post('/admin/kategori/form', 'AdminController@kategoriForm');
+    Route::get('/admin/kategori/delete/{id}', 'AdminController@kategoriHapus');
+
     Route::get('/admin/artikel', 'AdminController@artikelIndex');
+    Route::get('/admin/artikel/form', 'AdminController@artikelForm');
+    Route::get('/admin/artikel/form/{id}', 'AdminController@artikelForm');
+    Route::post('/admin/artikel/form', 'AdminController@artikelForm');
+
     Route::get('/admin/jurusan', 'AdminController@jurusanIndex');
+    Route::get('/admin/jurusan/form', 'AdminController@jurusanForm');
+    Route::get('/admin/jurusan/form/{id}', 'AdminController@jurusanForm');
+    Route::post('/admin/jurusan/form', 'AdminController@jurusanForm');
+
     Route::get('/admin/siswa', 'AdminController@siswaIndex');
+    Route::get('/admin/siswa/form', 'AdminController@siswaForm');
+    Route::get('/admin/siswa/form/{id}', 'AdminController@siswaForm');
+    Route::post('/admin/siswa/form', 'AdminController@siswaForm');
+
     Route::get('/admin/alumni', 'AdminController@alumniIndex');
+    Route::get('/admin/alumni/form', 'AdminController@alumniForm');
+    Route::get('/admin/alumni/form/{id}', 'AdminController@alumniForm');
+    Route::post('/admin/alumni/form', 'AdminController@alumniForm');
+
     Route::get('/admin/guru', 'AdminController@guruIndex');
+    Route::get('/admin/guru/form', 'AdminController@guruForm');
+    Route::get('/admin/guru/form/{id}', 'AdminController@guruForm');
+    Route::post('/admin/guru/form', 'AdminController@guruForm');
+
     Route::get('/admin/tentang', 'AdminController@tentang');
     Route::get('/admin/kontak', 'AdminController@kontak');
 });

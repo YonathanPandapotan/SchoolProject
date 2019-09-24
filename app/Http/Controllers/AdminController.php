@@ -61,18 +61,32 @@ class AdminController extends Controller
         return view('adminkategori', ['login' => $user, 'data'=>$data]);
     }
 
-    public function kategoriUpdate(Request $request){
-
-        $error = array();
-        $success = null;
-
+    public function kategoriForm(Request $req){
         $user = UserModel::where('username', Session::get('username'))->get()->first();
-        $kategoriData = KategoriModel::where('id', $request->id);
+        $succes = null;
+        $error = array();
+
+        if($req->id){
+            return response('yeah boi');
+        }
+
+        if($req->method() == 'POST'){
+            $baru = new KategoriModel();
+            $baru->nama_kategori = $req->kategori;
+            $baru->save();
+        }
+
         $data = array(
-            'kategori' => $kategoriData
+            'success' => $succes,
+            'error' => $error
         );
 
-        return view('adminkategoriform', ['login' => $user, 'data'=>$data, 'success' => $success, 'error' => $error]);
+        return view('adminKategoriForm', ['login' => $user, 'data'=>$data]);
+    }
+
+    public function kategoriHapus(Request $req){
+        KategoriModel::where('id_kategori', $req->id)->delete();
+        return redirect('/admin/kategori');
     }
 
     public function artikelIndex(){
@@ -86,6 +100,29 @@ class AdminController extends Controller
         return view('adminArtikel', ['login' => $user, 'data'=>$data]);
     }
 
+    public function artikelForm(Request $req){
+        $user = UserModel::where('username', Session::get('username'))->get()->first();
+        $succes = null;
+        $error = array();
+        $kategori = KategoriModel::all();
+
+        if($req->id){
+            return response('yeah boi');
+        }
+
+        if($req->method() == 'POST'){
+            return response('oioi');
+        }
+
+        $data = array(
+            'success' => $succes,
+            'error' => $error,
+            'kategori' => $kategori
+        );
+
+        return view('adminArtikelForm', ['login' => $user, 'data'=>$data]);
+    }
+
     public function jurusanIndex(){
         $user = UserModel::where('username', Session::get('username'))->get()->first();
         $jurusan = JurusanModel::all();
@@ -97,6 +134,29 @@ class AdminController extends Controller
         return view('adminJurusan', ['login' => $user, 'data'=>$data]);
     }
 
+    public function jurusanForm(Request $req){
+        $user = UserModel::where('username', Session::get('username'))->get()->first();
+        $succes = null;
+        $error = array();
+        $kategori = KategoriModel::all();
+
+        if($req->id){
+            return response('yeah boi');
+        }
+
+        if($req->method() == 'POST'){
+            return response('oioi');
+        }
+
+        $data = array(
+            'success' => $succes,
+            'error' => $error,
+            'kategori' => $kategori
+        );
+
+        return view('adminJurusanForm', ['login' => $user, 'data'=>$data]);
+    }
+
     public function siswaIndex(){
         $user = UserModel::where('username', Session::get('username'))->get()->first();
         $siswa = SiswaModel::where('status', 'siswa')->get();
@@ -106,6 +166,31 @@ class AdminController extends Controller
         );
 
         return view('adminSiswa', ['login' => $user, 'data'=>$data]);
+    }
+
+    public function siswaForm(Request $req){
+        $user = UserModel::where('username', Session::get('username'))->get()->first();
+        $succes = null;
+        $error = array();
+        $jurusan = JurusanModel::all();
+        $title = 'Tambah Siswa';
+
+        if($req->id){
+            return response('yeah boi');
+        }
+
+        if($req->method() == 'POST'){
+            return response('oioi');
+        }
+
+        $data = array(
+            'success' => $succes,
+            'error' => $error,
+            'jurusan' => $jurusan,
+            'title' => $title
+        );
+
+        return view('adminSiswaForm', ['login' => $user, 'data'=>$data]);
     }
     
     public function alumniIndex(){
@@ -119,6 +204,31 @@ class AdminController extends Controller
         return view('adminAlumni', ['login' => $user, 'data'=>$data]);
     }
 
+    public function alumniForm(Request $req){
+        $user = UserModel::where('username', Session::get('username'))->get()->first();
+        $succes = null;
+        $error = array();
+        $jurusan = JurusanModel::all();
+        $title = 'Tambah Alumni';
+
+        if($req->id){
+            return response('yeah boi');
+        }
+
+        if($req->method() == 'POST'){
+            return response('oioi');
+        }
+
+        $data = array(
+            'success' => $succes,
+            'error' => $error,
+            'jurusan' => $jurusan,
+            'title' => $title
+        );
+
+        return view('adminSiswaForm', ['login' => $user, 'data'=>$data]);
+    }
+
     public function guruIndex(){
         $user = UserModel::where('username', Session::get('username'))->get()->first();
         $GuruModel = GuruModel::all();
@@ -128,6 +238,31 @@ class AdminController extends Controller
         );
 
         return view('adminGuru', ['login' => $user, 'data'=>$data]);
+    }
+
+    public function guruForm(Request $req){
+        $user = UserModel::where('username', Session::get('username'))->get()->first();
+        $succes = null;
+        $error = array();
+        $jurusan = JurusanModel::all();
+        $title = 'Tambah Guru';
+
+        if($req->id){
+            return response('yeah boi');
+        }
+
+        if($req->method() == 'POST'){
+            return response('oioi');
+        }
+
+        $data = array(
+            'success' => $succes,
+            'error' => $error,
+            'jurusan' => $jurusan,
+            'title' => $title
+        );
+
+        return view('adminGuruForm', ['login' => $user, 'data'=>$data]);
     }
 
     public function tentang(){

@@ -8,4 +8,5 @@ class KategoriModel extends Model
 {
     //
     protected $table = 'kategori';
+    public $timestamps = false;
 }

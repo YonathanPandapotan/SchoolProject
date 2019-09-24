@@ -11,7 +11,7 @@
     <a href="#"><span class="fa fa-book"></span> Kategori</a>
   </li>
 </ol>
-<a href="/kategori/insert" class="btn btn-primary" style="margin-bottom: 20px;"><span class="fa fa-pencil"></span> Tambah Kategori</a>
+<a href="/admin/kategori/form" class="btn btn-primary" style="margin-bottom: 20px;"><span class="fa fa-pencil"></span> Tambah Kategori</a>
 
 <div class="col-lg-12">
 	<table id="TableId" class="table table-responsive">

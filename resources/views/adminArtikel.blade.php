@@ -11,7 +11,7 @@
     <a href="#"><span class="fa fa-book"></span> Artikel</a>
   </li>
 </ol>
-<a href="/admin/kategori/form/" class="btn btn-primary" style="margin-bottom: 20px;"><span class="fa fa-pencil"></span> Tambah Artikel</a>
+<a href="/admin/artikel/form/" class="btn btn-primary" style="margin-bottom: 20px;"><span class="fa fa-pencil"></span> Tambah Artikel</a>
 
 <div class="col-lg-12">
 	<table id="TableId" class="table table-responsive">
@@ -42,8 +42,8 @@
 					<td><?php echo $artikel->penulis; ?></td>
 					<td><?php echo substr(strip_tags($artikel->isi), 0, 100); ?></td>
 					<td>
-						<a href="/admin/kategori/form/<?php echo $artikel->id_artikel; ?>" class="btn btn-warning">Edit</a>
-						<a href="/admin/kategori/delete/<?php echo $artikel->id_artikel; ?>" class="btn btn-danger" onclick="return confirm('Anda Yakin Ingin Menghapus Data Ini ?')">Hapus</a>
+						<a href="/admin/artikel/form/<?php echo $artikel->id_artikel; ?>" class="btn btn-warning">Edit</a>
+						<a href="/admin/artikel/delete/<?php echo $artikel->id_artikel; ?>" class="btn btn-danger" onclick="return confirm('Anda Yakin Ingin Menghapus Data Ini ?')">Hapus</a>
 					</td>
 				</tr>
 			<?php 
