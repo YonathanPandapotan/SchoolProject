@@ -11,7 +11,8 @@ use App\SiswaModel;
 use App\TentangModel;
 use App\UserModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Str;
 
 class MainController extends Controller
 {
@@ -22,6 +23,16 @@ class MainController extends Controller
         $data['artikel'] = $artikel;
 
         return view('home', ['data' => $data]);
+    }
+
+    public function cookies(Request $request){
+
+        return response($request->cookie('key'));
+
+        $cookie = Cookie::make('key', 'value', 1);
+        Cookie::queue('key', 'value', 1);
+
+        return response('cookies!')->withCookie($cookie);
     }
     
     public function bukutamu(){
@@ -94,11 +105,8 @@ class MainController extends Controller
     }
 
     public function login(Request $request){
-        $message = array();
 
-        if(Session::get('login')){
-            return redirect('/admin/home');
-        }
+        $message = array();
 
         if($request->method() == 'POST'){              
             $user = UserModel::where('email', $request->username)->where('password', md5($request->password))->get()->first();
@@ -108,14 +116,9 @@ class MainController extends Controller
             }
             else{
                 // $auth_token = Str::random(40);
-                // UserModel::where('email', $request->input('email'))->update(['auth_token' => $auth_token]);;
-                // $cookie = Cookie::forever('auth_token', $auth_token);
-                Session::put('nama_lengkap', $user->nama_lengkap);
-                Session::put('username', $user->username);
-                Session::put('email', $user->email);
-                Session::put('no_hp', $user->no_hp);
-                Session::put('alamat', $user->alamat);
-                Session::put('login', TRUE);
+                // UserModel::where('email', $request->username)->update(['auth_token' => $auth_token]);;
+                // $cookie = Cookie::make('auth_token', $auth_token, 10);
+                $request->session()->put('login', 'true');
                 return redirect('/admin/home');
             }
         }
@@ -154,5 +157,17 @@ class MainController extends Controller
         ];
 
         return $data;
+    }
+
+    public function session(Request $request){
+
+        $request->session()->put('key', 'apalek');
+
+        return response($request->session()->all());
+    }
+
+    public function checksession(Request $request){
+
+        return response($request->session()->all());
     }
 }

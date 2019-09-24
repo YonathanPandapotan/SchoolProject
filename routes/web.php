@@ -19,6 +19,9 @@ Route::get('/admin', function(){
     return redirect('/login');
 });
 
+Route::get('/session', 'MainController@session');
+Route::get('/checksession', 'MainController@checksession');
+
 Route::group(['prefix' => '', 'as' => ''], function () {
     Route::get('/home', 'MainController@homePage');
     Route::get('/bukutamu', 'MainController@bukutamu');
