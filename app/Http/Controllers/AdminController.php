@@ -11,8 +11,10 @@ use App\UserModel;
 use App\JurusanModel;
 use App\SiswaModel;
 use App\TentangModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -65,21 +67,20 @@ class AdminController extends Controller
         $user = UserModel::where('username', Session::get('username'))->get()->first();
         $succes = null;
         $error = array();
-
-        if($req->id){
-            return response('yeah boi');
-        }
-
-        if($req->method() == 'POST'){
-            $baru = new KategoriModel();
-            $baru->nama_kategori = $req->kategori;
-            $baru->save();
-        }
-
         $data = array(
             'success' => $succes,
             'error' => $error
         );
+
+        if($req->id){
+            $kategori = KategoriModel::where('id_kategori', $req->id)->get()->first();
+            $data['kategori'] = $kategori;
+        }
+
+        if($req->method() == 'POST'){
+            KategoriModel::updateOrCreate(['id_kategori' => $req->id], ['nama_kategori' => $req->kategori]);
+            return redirect('admin/kategori');
+        }
 
         return view('adminKategoriForm', ['login' => $user, 'data'=>$data]);
     }
@@ -101,26 +102,50 @@ class AdminController extends Controller
     }
 
     public function artikelForm(Request $req){
+
         $user = UserModel::where('username', Session::get('username'))->get()->first();
         $succes = null;
         $error = array();
         $kategori = KategoriModel::all();
-
-        if($req->id){
-            return response('yeah boi');
-        }
-
-        if($req->method() == 'POST'){
-            return response('oioi');
-        }
-
         $data = array(
             'success' => $succes,
             'error' => $error,
             'kategori' => $kategori
         );
 
+        if($req->id){
+            $artikel = ArtikelModel::where('id_artikel', $req->id)->get()->first();
+            $data['artikel'] = $artikel;
+        }
+
+        if($req->method() == 'POST'){
+
+            $file = $req->file('images');
+            $name = time().'.jpg';
+            $path = public_path().'/images/';
+            $file->move($path, $name);
+            
+            ArtikelModel::updateOrCreate(['id_artikel' => $req->id],
+            [
+                'id_artikel' => random_int(0000, 9999),
+                'id_kategori' => $req->kategori,
+                'judul' => $req->judul,
+                'penulis' => $req->penulis,
+                'isi' => $req->penulis,
+                'tanggal' => Carbon::now()->toDateString(),
+                'waktu' => Carbon::now()->toTimeString(),
+                'images' => $name
+            ]);
+            
+            return redirect('admin/artikel');
+        }
+
         return view('adminArtikelForm', ['login' => $user, 'data'=>$data]);
+    }
+
+    public function artikelHapus(Request $req){
+        ArtikelModel::where('id_artikel', $req->id)->delete();
+        return redirect('/admin/artikel');
     }
 
     public function jurusanIndex(){

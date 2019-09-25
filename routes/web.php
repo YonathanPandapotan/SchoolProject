@@ -45,12 +45,14 @@ Route::group(['prefix' => '', 'as' => ''], function () {
     Route::get('/admin/kategori/form', 'AdminController@kategoriForm');
     Route::get('/admin/kategori/form/{id}', 'AdminController@kategoriForm');
     Route::post('/admin/kategori/form', 'AdminController@kategoriForm');
+    Route::post('/admin/kategori/form/{id}', 'AdminController@kategoriForm');
     Route::get('/admin/kategori/delete/{id}', 'AdminController@kategoriHapus');
 
     Route::get('/admin/artikel', 'AdminController@artikelIndex');
     Route::get('/admin/artikel/form', 'AdminController@artikelForm');
     Route::get('/admin/artikel/form/{id}', 'AdminController@artikelForm');
     Route::post('/admin/artikel/form', 'AdminController@artikelForm');
+    Route::get('/admin/artikel/delete/{id}', 'AdminController@artikelHapus');
 
     Route::get('/admin/jurusan', 'AdminController@jurusanIndex');
     Route::get('/admin/jurusan/form', 'AdminController@jurusanForm');

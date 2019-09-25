@@ -56,7 +56,7 @@
                 <h3>General</h3>
                 <ul class="nav side-menu">
                   <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/home') !== false) echo 'class="current"'; ?>><a href="/admin/home"><i class="fa fa-home"></i> Home</a></li>
-                  <li><a href="../"><i class="fa fa-send"></i> Lihat Website</a></li>
+                  <li><a href="../" target="_blank"><i class="fa fa-send"></i> Lihat Website</a></li>
                   <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/bukutamu') !== false) echo 'class="current"'; ?>><a href="/admin/bukutamu"><i class="fa fa-book"></i> Buku Tamu</a></li>
                   <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/kategori') !== false) echo 'class="current"'; ?>><a href="/admin/kategori"><i class="fa fa-fw fa-th-large"></i> Kategori Artikel </a></li>
                   <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/artikel') !== false) echo 'class="current"'; ?>><a href="/admin/artikel"><i class="fa fa-fw fa-newspaper-o"></i> Artikel</a></li>

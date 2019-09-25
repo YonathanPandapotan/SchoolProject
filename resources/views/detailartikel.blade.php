@@ -12,7 +12,7 @@
 		</div>
 		<div class="text">
 			<?php if ($artikel->images) { ?>
-				<img src="public/images/artikel/<?php echo $artikel->images; ?>" alt="" style="float:left;max-width: 200px;margin: 0 5px 5px 0">
+				<img src="{{asset('images/').'/'.$artikel->images}}" alt="" style="float:left;max-width: 200px;margin: 0 5px 5px 0">
 			<?php 
 			} 
 				echo $artikel->isi;
