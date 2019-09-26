@@ -39,6 +39,7 @@
 </div>
 <div class="col-xs-7">
 	<form method="post" enctype="multipart/form-data">
+		@csrf <!-- {{ csrf_field() }} -->
 		<div class="form-group">
 			<label>Nip Guru</label>
 			<input type="number" name="nip" class="form-control" <?php if (isset($data['guru'])) echo "value='" . $data['guru']->nip . "'"; ?>>

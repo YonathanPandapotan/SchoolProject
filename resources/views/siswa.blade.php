@@ -19,9 +19,9 @@
 			<tr>
 				<td>
 					<?php if($siswa->images) { ?>
-						<img src="public/images/siswa/<?php echo $siswa->images; ?>" alt="" style="width: 50px;height: 50px;">
+						<img src="{{asset('images/siswa').'/'.$siswa->images}}" alt="" style="width: 50px;height: 50px;">
 					<?php }else { ?>
-						<img src="public/images/no_user.jpg" alt="" style="width: 50px;height: 50px;">
+						<img src="{{asset('images/no_user.jpg')}}" alt="" style="width: 50px;height: 50px;">
 					<?php } ?>		
 				</td>
 				<td style="vertical-align: middle"><?php echo $siswa->nis; ?></td>

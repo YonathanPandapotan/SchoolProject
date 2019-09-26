@@ -44,6 +44,7 @@
 		</div>
 		<div class="x_content">
 			<form method="post">
+				@csrf <!-- {{ csrf_field() }} -->
 				<textarea id="editor" name="tentang"><?php echo $data['tentang']['tentang']; ?></textarea>
 				<br>	
 				<button type="submit" class="btn btn-primary">Simpan</button>

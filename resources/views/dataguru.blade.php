@@ -19,9 +19,9 @@
 			<tr>
 				<td>
 					<?php if($guru->images) { ?>
-						<img src="public/images/guru/<?php echo $guru->images; ?>" alt="" style="width: 50px;height: 50px;">
+						<img src="{{asset('images/guru').'/'.$guru->images}}" alt="" style="width: 50px;height: 50px;">
 					<?php }else { ?>
-						<img src="public/images/no_user.jpg" alt="" style="width: 50px;height: 50px;">
+						<img src="{{asset('images/no_user.jpg')}}" alt="" style="width: 50px;height: 50px;">
 					<?php } ?>		
 				</td>
 				<td style="vertical-align: middle"><?php echo $guru->nip; ?></td>

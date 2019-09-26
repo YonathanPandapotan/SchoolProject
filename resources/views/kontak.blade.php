@@ -20,7 +20,7 @@ if (isset($data['error']) && count($data['error']) > 0) {
 	</div>
  <?php } ?>
 
- <form action="<?php echo POSITION_URL; ?>" method="POST" role="form">
+ <form action="#" method="POST" role="form">
  	<div class="form-group">
  		<label for="">Nama Lengkap :</label>
  		<input type="text" name="name" id="" class="form-control">

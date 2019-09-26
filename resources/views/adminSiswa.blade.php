@@ -32,9 +32,9 @@
 					<td><?php echo $no; ?></td>
 					<td>
 						<?php if($siswa->images) { ?> 
-						<img src="public/images/siswa/<?php echo $siswa->images; ?>" style="width: 50px;height: 50px" alt="<?php echo $siswa->judul; ?>">
+						<img src="{{asset('images/siswa').'/'.$siswa->images}}" style="width: 50px;height: 50px" alt="<?php echo $siswa->judul; ?>">
 					<?php } else { ?>
-						<img src="public/images/no_user.jpg" style="width: 50px;height: 50px">
+						<img src="{{asset('images/no_user.jpg')}}" style="width: 50px;height: 50px">
 					<?php } ?>
 					</td>
 					<td><?php echo $siswa->nis; ?></td>

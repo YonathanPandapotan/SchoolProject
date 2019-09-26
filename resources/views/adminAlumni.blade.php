@@ -34,7 +34,7 @@
 						<?php if($alumni->images) { ?> 
 						<img src="public/images/alumni/<?php echo $alumni->images; ?>" style="width: 50px;height: 50px" alt="<?php echo $alumni->judul; ?>">
 					<?php } else { ?>
-						<img src="public/images/no_user.jpg" style="width: 50px;height: 50px">
+						<img src="{{asset('images/no_user.jpg')}}" style="width: 50px;height: 50px">
 					<?php } ?>
 					</td>
 					<td><?php echo $alumni->nis; ?></td>

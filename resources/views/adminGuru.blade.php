@@ -33,9 +33,9 @@
 					<td><?php echo $no; ?></td>
 					<td>
 						<?php if($guru->images) { ?> 
-						<img src="public/images/guru/<?php echo $guru->images; ?>" style="width: 50px;height: 50px">
+						<img src="{{asset('images/guru').'/'.$guru->images}}" style="width: 50px;height: 50px">
 					<?php } else { ?>
-						<img src="public/images/no_user.jpg" style="width: 50px;height: 50px">
+						<img src="{{asset('images/no_user.jpg')}}" style="width: 50px;height: 50px">
 					<?php } ?>
 					</td>
 					<td><?php echo $guru->nip; ?></td>

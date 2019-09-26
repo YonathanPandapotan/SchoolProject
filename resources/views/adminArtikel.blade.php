@@ -34,7 +34,9 @@
 					<td><?php echo $artikel->waktu . " " . $artikel->tanggal  ?></td>
 					<td>
 					<?php if($artikel->images) { ?> 
-						<img src="{{asset('images/').'/'.$artikel->images}}" style="width: 100px" alt="<?php echo $artikel->judul; ?>">
+						<img src="{{asset('images/artikel').'/'.$artikel->images}}" style="width: 100px" alt="<?php echo $artikel->judul; ?>">
+					<?php } else { ?>
+						<img src="{{asset('images/artikel/noimage.jpg')}}" style="width: 100px" alt="<?php echo $artikel->judul; ?>">
 					<?php } ?>
 					</td>
 					<td><?php echo $artikel->nama_kategori; ?></td>

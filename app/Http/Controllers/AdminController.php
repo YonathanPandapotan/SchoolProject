@@ -122,8 +122,7 @@ class AdminController extends Controller
 
             $file = $req->file('images');
             $name = time().'.jpg';
-            $path = public_path().'/images/';
-            $file->move($path, $name);
+            $path = public_path().'/images/artikel';
             
             ArtikelModel::updateOrCreate(['id_artikel' => $req->id],
             [
@@ -136,6 +135,8 @@ class AdminController extends Controller
                 'waktu' => Carbon::now()->toTimeString(),
                 'images' => $name
             ]);
+
+            $file->move($path, $name);
             
             return redirect('admin/artikel');
         }
@@ -163,23 +164,28 @@ class AdminController extends Controller
         $user = UserModel::where('username', Session::get('username'))->get()->first();
         $succes = null;
         $error = array();
-        $kategori = KategoriModel::all();
-
-        if($req->id){
-            return response('yeah boi');
-        }
-
-        if($req->method() == 'POST'){
-            return response('oioi');
-        }
 
         $data = array(
             'success' => $succes,
-            'error' => $error,
-            'kategori' => $kategori
+            'error' => $error
         );
 
+        if($req->id){
+            $jurusan = JurusanModel::where('id_jurusan', $req->id)->get()->first();
+            $data['jurusan'] = $jurusan;
+        }
+
+        if($req->method() == 'POST'){
+            JurusanModel::updateOrCreate(['id_jurusan' => $req->id], ['nama_jurusan' => $req->jurusan]);
+            return redirect('admin/jurusan');
+        }        
+
         return view('adminJurusanForm', ['login' => $user, 'data'=>$data]);
+    }
+
+    public function jurusanHapus(Request $req){
+        JurusanModel::where('id_jurusan', $req->id)->delete();
+        return redirect('/admin/jurusan');
     }
 
     public function siswaIndex(){
@@ -194,19 +200,12 @@ class AdminController extends Controller
     }
 
     public function siswaForm(Request $req){
+
         $user = UserModel::where('username', Session::get('username'))->get()->first();
         $succes = null;
         $error = array();
         $jurusan = JurusanModel::all();
         $title = 'Tambah Siswa';
-
-        if($req->id){
-            return response('yeah boi');
-        }
-
-        if($req->method() == 'POST'){
-            return response('oioi');
-        }
 
         $data = array(
             'success' => $succes,
@@ -215,7 +214,42 @@ class AdminController extends Controller
             'title' => $title
         );
 
+        if($req->id){
+            $siswa = SiswaModel::where('id_siswa', $req->id)->get()->first();
+            $data['siswa'] = $siswa;
+            $data['title'] = 'Edit Siswa';
+        }
+
+        if($req->method() == 'POST'){
+
+            $file = $req->file('images');
+            $name = time().'.jpg';
+            $path = public_path().'/images/siswa';
+            
+            SiswaModel::updateOrCreate(['id_siswa' => $req->id],
+            [
+                'id_jurusan' => $req->jurusan,
+                'nama_lengkap' => $req->nama,
+                'nis' => $req->nis,
+                'jenis_kelamin' => $req->jenis_kelamin,
+                'alamat' => $req->alamat,
+                'nomor_hp' => $req->nomor_hp,
+                'angkatan' => $req->angkatan,
+                'images' => $name,
+                'status' => $req->status
+            ]);
+
+            $file->move($path, $name);
+            
+            return redirect('admin/siswa');
+        }
+
         return view('adminSiswaForm', ['login' => $user, 'data'=>$data]);
+    }
+
+    public function hapusSiswa(Request $req){
+        SiswaModel::where('id_siswa', $req->id)->delete();
+        return redirect('/admin/siswa');
     }
     
     public function alumniIndex(){
@@ -236,14 +270,6 @@ class AdminController extends Controller
         $jurusan = JurusanModel::all();
         $title = 'Tambah Alumni';
 
-        if($req->id){
-            return response('yeah boi');
-        }
-
-        if($req->method() == 'POST'){
-            return response('oioi');
-        }
-
         $data = array(
             'success' => $succes,
             'error' => $error,
@@ -251,7 +277,42 @@ class AdminController extends Controller
             'title' => $title
         );
 
-        return view('adminSiswaForm', ['login' => $user, 'data'=>$data]);
+        if($req->id){
+            $siswa = SiswaModel::where('id_siswa', $req->id)->get()->first();
+            $data['siswa'] = $siswa;
+            $data['title'] = 'Edit Alumni';
+        }
+
+        if($req->method() == 'POST'){
+
+            $file = $req->file('images');
+            $name = time().'.jpg';
+            $path = public_path().'/images/alumni';
+            
+            SiswaModel::updateOrCreate(['id_siswa' => $req->id],
+            [
+                'id_jurusan' => $req->jurusan,
+                'nama_lengkap' => $req->nama,
+                'nis' => $req->nis,
+                'jenis_kelamin' => $req->jenis_kelamin,
+                'alamat' => $req->alamat,
+                'nomor_hp' => $req->nomor_hp,
+                'angkatan' => $req->angkatan,
+                'images' => $name,
+                'status' => $req->status
+            ]);
+
+            $file->move($path, $name);
+            
+            return redirect('admin/alumni');
+        }
+
+        return view('adminAlumniForm', ['login' => $user, 'data'=>$data]);
+    }
+
+    public function hapusAlumni(Request $req){
+        SiswaModel::where('id_siswa', $req->id)->delete();
+        return redirect('/admin/alumni');
     }
 
     public function guruIndex(){
@@ -271,15 +332,6 @@ class AdminController extends Controller
         $error = array();
         $jurusan = JurusanModel::all();
         $title = 'Tambah Guru';
-
-        if($req->id){
-            return response('yeah boi');
-        }
-
-        if($req->method() == 'POST'){
-            return response('oioi');
-        }
-
         $data = array(
             'success' => $succes,
             'error' => $error,
@@ -287,19 +339,63 @@ class AdminController extends Controller
             'title' => $title
         );
 
+        if($req->id){
+            $guru = GuruModel::where('id_guru', $req->id)->get()->first();
+            $data['guru'] = $guru;
+            $data['title'] = 'Edit Guru';
+        }
+
+        if($req->method() == 'POST'){
+            $file = $req->file('images');
+            $name = time().'.jpg';
+            $path = public_path().'/images/guru';
+            
+            GuruModel::updateOrCreate(['id_guru' => $req->id],
+            [
+                'nama_lengkap' => $req->nama,
+                'nip' => $req->nip,
+                'jenis_kelamin' => $req->jenis_kelamin,
+                'golongan' => $req->golongan,
+                'no_hp' => $req->nomor_hp,
+                'tempat_lahir' => $req->tempat_lahir,
+                'mata_pelajaran' => $req->mata_pelajaran,
+                'alamat' => $req->alamat,
+                'images' => $name,
+                'status' => $req->status
+            ]);
+
+            $file->move($path, $name);
+            
+            return redirect('admin/guru');
+        }
+
         return view('adminGuruForm', ['login' => $user, 'data'=>$data]);
     }
 
-    public function tentang(){
+    public function hapusGuru(Request $req){
+        GuruModel::where('id_guru', $req->id)->delete();
+        return redirect('/admin/guru');
+    }
+
+    public function tentang(Request $req){
         $user = UserModel::where('username', Session::get('username'))->get()->first();
         $error = array();
         $success = null;
 
-        $tentang = TentangModel::all();
+        if($req->method() == 'POST'){
+            TentangModel::truncate();
+
+            $data = new TentangModel();
+            $data->tentang = $req->tentang;
+            $data->save();
+
+        }
+
+        $tentang = TentangModel::get()->first();
 
         $data = array(
             'title' => 'Edit Tentang',
-            'tentang' => $tentang[0],
+            'tentang' => $tentang,
             'error' => $error,
             'success' => $success
           );

@@ -39,6 +39,7 @@
 </div>
 <div class="col-xs-7">
 	<form method="post">
+		@csrf <!-- {{ csrf_field() }} -->
 		<div class="form-group">
 			<label>Nama Jurusan</label>
 			<input type="text" name="jurusan" class="form-control" <?php if (isset($data['jurusan'])) echo "value='" . $data['jurusan']->nama_jurusan . "'"; ?>>

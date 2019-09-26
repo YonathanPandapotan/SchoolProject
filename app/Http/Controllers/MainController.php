@@ -80,6 +80,16 @@ class MainController extends Controller
         return view('siswa', ['data' => $data]);
     }
 
+    public function detailSiswa(Request $req){
+        $data = $this->template();
+
+        $siswa = SiswaModel::where('id_siswa', $req->id)->get();
+
+        $data['siswa'] = $siswa;
+
+        return view('detailSiswa', ['data' => $data]);
+    }
+
     public function dataGuru(){
         $data = $this->template();
         $dataguru = GuruModel::all();
@@ -96,12 +106,37 @@ class MainController extends Controller
         return view('alumni', ['data' => $data]);
     }
 
+    public function detailAlumni(Request $req){
+        $data = $this->template();
+
+        $alumni = SiswaModel::where('id_siswa', $req->id)->get();
+
+        $data['siswa'] = $alumni;
+
+        return view('detailSiswa', ['data' => $data]);
+    }
+
     public function tentangSekolah(){
         $data = $this->template();
         $tentang = TentangModel::all();
         $data['tentang'] = $tentang[0];
 
         return view('tentang', ['data' => $data]);
+    }
+
+    public function kontak(){
+        $data = $this->template();
+        $error = array();
+        $success = null;
+
+        $kontak = KontakModel::all();
+
+        $data['error'] = $error;
+        $data['success'] = $success;
+        $data['kontak'] = $kontak;
+
+        return view('kontak', ['data'=>$data]);
+
     }
 
     public function login(Request $request){

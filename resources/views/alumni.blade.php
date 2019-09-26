@@ -19,14 +19,14 @@
 			<tr>
 				<td>
 					<?php if($alumni->images) { ?>
-						<img src="public/images/alumni/<?php echo $alumni->images; ?>" alt="" style="width: 50px;height: 50px;">
+						<img src="{{asset('images/alumni').'/'.$alumni->images}}" alt="" style="width: 50px;height: 50px;">
 					<?php }else { ?>
-						<img src="public/images/no_user.jpg" alt="" style="width: 50px;height: 50px;">
+						<img src="{{asset('images/no_user.jpg')}}" alt="" style="width: 50px;height: 50px;">
 					<?php } ?>		
 				</td>
 				<td style="vertical-align: middle"><?php echo $alumni->nis; ?></td>
 				<td style="vertical-align: middle;">
-					<a href="/dataalumni/detail/<?php echo $alumni->id_siswa ?>"><?php echo $alumni->nama_lengkap; ?></a>
+					<a href="/alumni/detail/<?php echo $alumni->id_siswa ?>"><?php echo $alumni->nama_lengkap; ?></a>
 				</td>
 				<td style="vertical-align: middle;"><?php echo $alumni->nama_jurusan; ?></td>
 				<td style="vertical-align: middle;"><?php echo $alumni->jenis_kelamin; ?></td>

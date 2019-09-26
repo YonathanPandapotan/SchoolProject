@@ -5,17 +5,17 @@
 
 <ol class="breadcrumb" style="font-size: 15px">
   <li>
-    <a href="#"><span class="fa fa-home"></span> Home</a>
+    <a href="/admin"><span class="fa fa-home"></span> Home</a>
   </li>
   <li>
-    <a href="#"><span class="fa fa-book"></span> Alumni</a>
+    <a href="/admin/alumni"><span class="fa fa-book"></span> Alumni</a>
   </li>
   <li>
     <a href="#"><span class="fa fa-pencil"></span> <?php echo $data['title']; ?></a>
   </li>
 </ol>
 <div class="col-xs-12">
-	<a href="<?php echo PATH; ?>?page=alumni" class="btn btn-danger" style="margin-bottom: 15px"><span class="fa fa-arrow-left"></span> Kembali</a>
+	<a href="/admin/alumni" class="btn btn-danger" style="margin-bottom: 15px"><span class="fa fa-arrow-left"></span> Kembali</a>
 </div>
 <div class="col-xs-12">
 	<?php 
@@ -110,11 +110,10 @@
 		<div class="form-group">
 			<label>Status</label>
 			<select name="status" class="form-control" required="required">
-				<option disabled="" selected="">- Pilih Status -</option>
+				<option disabled="" >- Pilih Status -</option>
 				<option value="Siswa" <?php if(isset($data['siswa'])) {
 				if($data['siswa']->status == 'Siswa') echo "selected"; }?>>Siswa</option>
-				<option value="Alumni" <?php if(isset($data['siswa'])) {
-				if($data['siswa']->status == 'Alumni') echo "selected"; }?>>Alumni</option>
+				<option value="Alumni" selected="">Alumni</option>
 			</select>
 		</div>
 		<button type="submit" class="btn btn-primary">Simpan</button>
