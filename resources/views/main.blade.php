@@ -155,7 +155,7 @@
                             foreach ($data['kategori'] as $kategori) {
                          ?>
                              <li>
-                                <a href="<?php echo "{{ url('/') }}"; ?>?page=kategori&&action=detail&&id=<?php echo $kategori->id_kategori; ?>">
+                                <a href="/listKategori/<?php echo $kategori->id_kategori; ?>">
                                     <?php echo $kategori->nama_kategori; ?>
                                     (<?php echo $kategori->total; ?>)
                                 </a>

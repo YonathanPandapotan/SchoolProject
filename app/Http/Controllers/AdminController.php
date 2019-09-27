@@ -221,10 +221,14 @@ class AdminController extends Controller
         }
 
         if($req->method() == 'POST'){
-
-            $file = $req->file('images');
-            $name = time().'.jpg';
-            $path = public_path().'/images/siswa';
+            $file = null;
+            $name = '';
+            $path = '';
+            if($req->file('images')){
+                $file = $req->file('images');
+                $name = time().'.jpg';
+                $path = public_path().'/images/siswa';
+            }
             
             SiswaModel::updateOrCreate(['id_siswa' => $req->id],
             [
@@ -239,7 +243,9 @@ class AdminController extends Controller
                 'status' => $req->status
             ]);
 
-            $file->move($path, $name);
+            if($req->file('images')){
+                $file->move($path, $name);
+            }
             
             return redirect('admin/siswa');
         }
@@ -250,6 +256,18 @@ class AdminController extends Controller
     public function hapusSiswa(Request $req){
         SiswaModel::where('id_siswa', $req->id)->delete();
         return redirect('/admin/siswa');
+    }
+
+    public function detailSiswa(Request $req){
+        $user = UserModel::where('username', Session::get('username'))->get()->first();
+        $siswa = SiswaModel::join ('jurusan', 'jurusan.id_jurusan', '=', 'siswa.id_jurusan')->where('siswa.id_siswa', $req->id)->get()->first();
+
+        $data = array(
+            'title' => 'Detail Siswa',
+            'siswa' => $siswa
+        );
+
+        return view('adminSiswaDetail', ['login' => $user, 'data' => $data]);
     }
     
     public function alumniIndex(){
@@ -285,9 +303,14 @@ class AdminController extends Controller
 
         if($req->method() == 'POST'){
 
-            $file = $req->file('images');
-            $name = time().'.jpg';
-            $path = public_path().'/images/alumni';
+            $file = null;
+            $name = '';
+            $path = '';
+            if($req->file('images')){
+                $file = $req->file('images');
+                $name = time().'.jpg';
+                $path = public_path().'/images/alumni';
+            }
             
             SiswaModel::updateOrCreate(['id_siswa' => $req->id],
             [
@@ -302,7 +325,9 @@ class AdminController extends Controller
                 'status' => $req->status
             ]);
 
-            $file->move($path, $name);
+            if($req->file('images')){
+                $file->move($path, $name);
+            }
             
             return redirect('admin/alumni');
         }
@@ -346,9 +371,15 @@ class AdminController extends Controller
         }
 
         if($req->method() == 'POST'){
-            $file = $req->file('images');
-            $name = time().'.jpg';
-            $path = public_path().'/images/guru';
+
+            $file = null;
+            $name = '';
+            $path = '';
+            if($req->file('images')){
+                $file = $req->file('images');
+                $name = time().'.jpg';
+                $path = public_path().'/images/guru';
+            }
             
             GuruModel::updateOrCreate(['id_guru' => $req->id],
             [
@@ -364,7 +395,9 @@ class AdminController extends Controller
                 'status' => $req->status
             ]);
 
-            $file->move($path, $name);
+            if($req->file('images')){
+                $file->move($path, $name);
+            }
             
             return redirect('admin/guru');
         }
@@ -375,6 +408,18 @@ class AdminController extends Controller
     public function hapusGuru(Request $req){
         GuruModel::where('id_guru', $req->id)->delete();
         return redirect('/admin/guru');
+    }
+
+    public function detailGuru(Request $req){
+        $user = UserModel::where('username', Session::get('username'))->get()->first();
+        $guru = GuruModel::where('id_guru', $req->id)->get()->first();
+
+        $data = array(
+            'title' => 'Detail Guru',
+            'guru' => $guru
+        );
+
+        return view('adminGuruDetail', ['login' => $user, 'data' => $data]);
     }
 
     public function tentang(Request $req){
@@ -413,4 +458,83 @@ class AdminController extends Controller
 
         return view('adminKontak', ['login' => $user, 'data' => $data]);
     }
+
+    public function manajemen(){
+        $user = UserModel::where('username', Session::get('username'))->get()->first();
+        $userData = UserModel::all();
+
+        $data = array(
+            'user' => $userData,
+            'title' => 'Data User'
+        );
+
+        return view('adminUser', ['login' => $user, 'data' => $data]);
+    }
+
+    public function manajemenForm(Request $req){
+        $user = UserModel::where('username', Session::get('username'))->get()->first();
+        $succes = null;
+        $error = array();
+        $title = 'Tambah User';
+        $data = array(
+            'success' => $succes,
+            'error' => $error,
+            'title' => $title
+        );
+
+        if($req->id){
+            $guru = UserModel::where('id_user', $req->id)->get()->first();
+            $data['user'] = $guru;
+            $data['title'] = 'Edit Guru';
+        }
+
+        if($req->method() == 'POST'){
+
+            $file = null;
+            $name = '';
+            $path = '';
+            if($req->file('images')){
+                $file = $req->file('images');
+                $name = time().'.jpg';
+                $path = public_path().'/images/user';
+            }
+            
+            UserModel::updateOrCreate(['id_user' => $req->id],
+            [
+                'nama_lengkap' => $req->nama_lengkap,
+                'email' => $req->email,
+                'no_hp' => $req->no_hp,
+                'alamat' => $req->alamat,
+                'username' => $req->username,
+                'password' => $req->password,
+                'images' => $name
+            ]);
+
+            if($req->file('images')){
+                $file->move($path, $name);
+            }
+            
+            return redirect('admin/user');
+        }
+
+        return view('adminUserForm', ['login' => $user, 'data'=>$data]);
+    }
+
+    public function manajemenHapus(Request $req){
+        UserModel::where('id_user', $req->id)->delete();
+        return redirect('/admin/user');
+    }
+
+    public function manajemenUserDetail(Request $req){
+        $user = UserModel::where('username', Session::get('username'))->get()->first();
+        $userData = UserModel::where('id_user', $req->id)->get()->first();
+
+        $data = array(
+            'title' => 'Detail Guru',
+            'user' => $userData
+        );
+
+        return view('adminUserDetail', ['login' => $user, 'data' => $data]);
+    }    
+
 }

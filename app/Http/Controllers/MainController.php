@@ -139,6 +139,19 @@ class MainController extends Controller
 
     }
 
+    public function detailKategori(Request $req){
+
+        $data = $this->template();
+        $kategori = KategoriModel::where('id_kategori', $req->id)->get();
+        // return response($kategori->nama_kategori);
+        $artikel = ArtikelModel::where('id_kategori', $req->id)->get();
+
+        $data['kategoriList'] = $kategori;
+        $data['artikel'] = $artikel;
+
+        return view('detailKategori', ['data' => $data]);
+    }
+
     public function login(Request $request){
 
         $message = array();
@@ -163,6 +176,12 @@ class MainController extends Controller
             }
         }
         return view('login', ['message' => $message]);
+    }
+
+    public function logout(Request $req){
+
+        $req->session()->flush();
+        return redirect('login');
     }
 
     public function adminhome(){

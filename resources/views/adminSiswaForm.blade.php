@@ -103,9 +103,10 @@
 			</div>
 			<?php if(isset($data['siswa'])) {?>
 			<div class="col-md-6">
-				<img src="public/images/siswa/<?php echo $data['siswa']->images; ?>" width="100px" alt="<?php echo $data['siswa']->images; ?>"
-				>
+				<img src="{{asset('images/siswa').'/'.$data['siswa']->images}}" width="100px" alt="<?php echo $data['siswa']->images; ?>">
 			</div>
+			<?php } else { ?>
+				<img src="{{asset('images/no_user.jpg')}}" width="100px">
 			<?php } ?>
 		</div>	
 		<div class="form-group">

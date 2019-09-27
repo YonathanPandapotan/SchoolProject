@@ -56,7 +56,7 @@
                 <h3>General</h3>
                 <ul class="nav side-menu">
                   <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/home') !== false) echo 'class="current"'; ?>><a href="/admin/home"><i class="fa fa-home"></i> Home</a></li>
-                  <li><a href="../" target="_blank"><i class="fa fa-send"></i> Lihat Website</a></li>
+                  <li><a href="/" target="_blank"><i class="fa fa-send"></i> Lihat Website</a></li>
                   <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/bukutamu') !== false) echo 'class="current"'; ?>><a href="/admin/bukutamu"><i class="fa fa-book"></i> Buku Tamu</a></li>
                   <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/kategori') !== false) echo 'class="current"'; ?>><a href="/admin/kategori"><i class="fa fa-fw fa-th-large"></i> Kategori Artikel </a></li>
                   <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/artikel') !== false) echo 'class="current"'; ?>><a href="/admin/artikel"><i class="fa fa-fw fa-newspaper-o"></i> Artikel</a></li>
@@ -66,7 +66,7 @@
                   <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/guru') !== false) echo 'class="current"'; ?>><a href="/admin/guru"><i class="fa fa-fw fa-users"></i> Data Guru</a></li>
                   <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/tentang') !== false) echo 'class="current"'; ?>><a href="/admin/tentang"><i class="fa fa-fw fa-building"></i> Tentang Sekolah</a></li>
                   <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/kontak') !== false) echo 'class="current"'; ?>><a href="/admin/kontak"><i class="fa fa-fw fa-phone-square"></i> Kontak</a></li>
-                  <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/user') !== false) echo 'class="current"'; ?>><a href="</admin/user"><i class="fa fa-fw fa-users"></i> Manajemen User</a></li>
+                  <li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/user') !== false) echo 'class="current"'; ?>><a href="/admin/user"><i class="fa fa-fw fa-users"></i> Manajemen User</a></li>
                 </ul>
               </div>
 
@@ -93,11 +93,11 @@
 
                     <li><a href="/admin/user/detail/<?php echo $login['id_user']; ?>"> Profile</a></li>
                     <li>
-                      <a href="/admin/user/update/<?php echo $login['id_user']; ?>">
+                      <a href="/admin/user/form/<?php echo $login['id_user']; ?>">
                         <span>Settings</span>
                       </a>
                     </li>
-                    <li><a href="/admin/login"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
               </ul>
