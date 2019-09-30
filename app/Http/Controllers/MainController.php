@@ -230,3 +230,4 @@ class MainController extends Controller
         return response($request->session()->all());
     }
 }
+

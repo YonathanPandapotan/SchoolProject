@@ -126,7 +126,7 @@ class AdminController extends Controller
             
             ArtikelModel::updateOrCreate(['id_artikel' => $req->id],
             [
-                'id_artikel' => random_int(0000, 9999),
+                'id_artikel' => Str::random(70),
                 'id_kategori' => $req->kategori,
                 'judul' => $req->judul,
                 'penulis' => $req->penulis,
@@ -190,7 +190,7 @@ class AdminController extends Controller
 
     public function siswaIndex(){
         $user = UserModel::where('username', Session::get('username'))->get()->first();
-        $siswa = SiswaModel::where('status', 'siswa')->get();
+        $siswa = SiswaModel::where('status', 'Siswa')->get();
 
         $data = array(
             'siswa' => $siswa
@@ -232,12 +232,13 @@ class AdminController extends Controller
             
             SiswaModel::updateOrCreate(['id_siswa' => $req->id],
             [
+                'id_siswa' => Str::random(70),
                 'id_jurusan' => $req->jurusan,
                 'nama_lengkap' => $req->nama,
                 'nis' => $req->nis,
                 'jenis_kelamin' => $req->jenis_kelamin,
                 'alamat' => $req->alamat,
-                'nomor_hp' => $req->nomor_hp,
+                'no_hp' => $req->nomor_hp,
                 'angkatan' => $req->angkatan,
                 'images' => $name,
                 'status' => $req->status
@@ -272,7 +273,7 @@ class AdminController extends Controller
     
     public function alumniIndex(){
         $user = UserModel::where('username', Session::get('username'))->get()->first();
-        $siswa = SiswaModel::where('status', 'alumni')->get();
+        $siswa = SiswaModel::where('status', 'Alumni')->get();
 
         $data = array(
             'alumni' => $siswa
@@ -314,12 +315,13 @@ class AdminController extends Controller
             
             SiswaModel::updateOrCreate(['id_siswa' => $req->id],
             [
+                'id_siswa' => Str::random(70),
                 'id_jurusan' => $req->jurusan,
                 'nama_lengkap' => $req->nama,
                 'nis' => $req->nis,
                 'jenis_kelamin' => $req->jenis_kelamin,
                 'alamat' => $req->alamat,
-                'nomor_hp' => $req->nomor_hp,
+                'no_hp' => $req->nomor_hp,
                 'angkatan' => $req->angkatan,
                 'images' => $name,
                 'status' => $req->status
@@ -383,6 +385,7 @@ class AdminController extends Controller
             
             GuruModel::updateOrCreate(['id_guru' => $req->id],
             [
+                'id_guru' => Str::random(70),
                 'nama_lengkap' => $req->nama,
                 'nip' => $req->nip,
                 'jenis_kelamin' => $req->jenis_kelamin,
@@ -501,6 +504,7 @@ class AdminController extends Controller
             
             UserModel::updateOrCreate(['id_user' => $req->id],
             [
+                'id_user' => Str::random(70),
                 'nama_lengkap' => $req->nama_lengkap,
                 'email' => $req->email,
                 'no_hp' => $req->no_hp,
@@ -538,3 +542,4 @@ class AdminController extends Controller
     }    
 
 }
+
