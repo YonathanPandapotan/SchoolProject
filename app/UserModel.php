@@ -11,4 +11,5 @@ class UserModel extends Model
     public $timestamps = false;
     protected $fillable = ['id_guru', 'nama_lengkap', 'email', 'no_hp', 'alamat', 'username', 'password', 'images'];
     protected $primaryKey = 'id_user';
+    public $incrementing = false;
 }

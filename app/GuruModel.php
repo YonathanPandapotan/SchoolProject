@@ -11,4 +11,5 @@ class GuruModel extends Model
     public $timestamps = false;
     protected $fillable = ['id_guru', 'nama_lengkap', 'nip', 'jenis_kelamin', 'golongan', 'no_hp', 'tempat_lahir', 'mata_pelajaran', 'alamat', 'images', 'status'];
     protected $primaryKey = 'id_guru';
+    public $incrementing = false;
 }

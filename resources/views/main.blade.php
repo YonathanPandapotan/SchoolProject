@@ -138,7 +138,7 @@
                         <?php
                             foreach($data['main_artikel'] as $artikel) {
                          ?>
-                            <li><a href="/artikel/detail/<?php echo $artikel->id_artikel; ?>"><?php echo $artikel->judul; ?></a></li>
+                            <li><a href="/artikel/detail/<?php echo $artikel->id_artikel; ?>/<?php echo $artikel->judul; ?>"><?php echo $artikel->judul; ?></a></li>
                          <?php
                             }
                           ?>
@@ -155,7 +155,7 @@
                             foreach ($data['kategori'] as $kategori) {
                          ?>
                              <li>
-                                <a href="/listKategori/<?php echo $kategori->id_kategori; ?>">
+                                <a href="/listKategori/<?php echo Str::slug($kategori->nama_kategori); ?>">
                                     <?php echo $kategori->nama_kategori; ?>
                                     (<?php echo $kategori->total; ?>)
                                 </a>

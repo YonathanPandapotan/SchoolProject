@@ -16,7 +16,7 @@ Route::get('/', function(){
 });
 
 Route::get('/admin', function(){
-    return redirect('/login');
+    return redirect('/admin/home');
 });
 
 Route::get('/session', 'MainController@session');
@@ -26,18 +26,20 @@ Route::group(['prefix' => '', 'as' => ''], function () {
     Route::get('/home', 'MainController@homePage');
     Route::get('/bukutamu', 'MainController@bukutamu');
     Route::get('/artikel', 'MainController@artikel');
-    Route::get('/artikel/detail/{id}', 'MainController@artikelDetail');
+    Route::get('/artikel/detail/{id}/{nama}', 'MainController@artikelDetail');
     Route::get('/datasiswa', 'MainController@dataSiswa');
-    Route::get('/siswa/detail/{id}', 'MainController@detailSiswa');
+    Route::get('/datasiswa/detail/{id}', 'MainController@detailSiswa');
     Route::get('/dataguru', 'MainController@dataGuru');
+    Route::get('/dataguru/detail/{id}', 'MainController@detailGuru');
     Route::get('/dataalumni', 'MainController@dataAlumni');
+    Route::get('/dataalumni/detail/{id}', 'MainController@detailAlumni');
     Route::get('/alumni/detail/{id}', 'MainController@detailAlumni');
     Route::get('/tentangsekolah', 'MainController@tentangSekolah');
     Route::get('/kontak', 'MainController@kontak');
     Route::get('/login', 'MainController@login');
     Route::post('/login', 'MainController@login');
     Route::get('/logout', 'MainController@logout');
-    Route::get('/listKategori/{id}', 'MainController@detailKategori');
+    Route::get('/listKategori/{nama}', 'MainController@detailKategori');
 });
 
 Route::group(['prefix' => '', 'as' => ''], function () {
@@ -55,6 +57,7 @@ Route::group(['prefix' => '', 'as' => ''], function () {
     Route::get('/admin/artikel/form', 'AdminController@artikelForm');
     Route::get('/admin/artikel/form/{id}', 'AdminController@artikelForm');
     Route::post('/admin/artikel/form/{id}', 'AdminController@artikelForm');
+    Route::post('/admin/artikel/form', 'AdminController@artikelForm');
     Route::get('/admin/artikel/delete/{id}', 'AdminController@artikelHapus');
 
     Route::get('/admin/jurusan', 'AdminController@jurusanIndex');
@@ -78,7 +81,7 @@ Route::group(['prefix' => '', 'as' => ''], function () {
     Route::post('/admin/alumni/form/{id}', 'AdminController@alumniForm');
     Route::post('/admin/alumni/form', 'AdminController@alumniForm');
     Route::get('/admin/alumni/hapus/{id}', 'AdminController@hapusAlumni');
-    Route::get('/admin/alumni/detail/{id}', 'AdminController@detailSiswa');
+    Route::get('/admin/alumni/detail/{id}', 'AdminController@detailAlumni');
 
     Route::get('/admin/guru', 'AdminController@guruIndex');
     Route::get('/admin/guru/form', 'AdminController@guruForm');

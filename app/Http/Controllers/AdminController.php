@@ -78,7 +78,7 @@ class AdminController extends Controller
         }
 
         if($req->method() == 'POST'){
-            KategoriModel::updateOrCreate(['id_kategori' => $req->id], ['nama_kategori' => $req->kategori]);
+            KategoriModel::updateOrCreate(['id_kategori' => $req->id], ['id_kategori' => Str::random(5), 'nama_kategori' => $req->kategori]);
             return redirect('admin/kategori');
         }
 
@@ -119,24 +119,45 @@ class AdminController extends Controller
         }
 
         if($req->method() == 'POST'){
+            $file = null;
+            $name = '';
+            $path = '';
+            if($file = $req->file('images')){
+                $file = $req->file('images');
+                $name = time().'.jpg';
+                $path = public_path().'/images/artikel';
+            }
+            else{
+                $name = $req->images;
+            }
 
-            $file = $req->file('images');
-            $name = time().'.jpg';
-            $path = public_path().'/images/artikel';
-            
-            ArtikelModel::updateOrCreate(['id_artikel' => $req->id],
-            [
-                'id_artikel' => Str::random(70),
-                'id_kategori' => $req->kategori,
-                'judul' => $req->judul,
-                'penulis' => $req->penulis,
-                'isi' => $req->penulis,
-                'tanggal' => Carbon::now()->toDateString(),
-                'waktu' => Carbon::now()->toTimeString(),
-                'images' => $name
-            ]);
-
-            $file->move($path, $name);
+            $artikel= null;
+            if(ArtikelModel::where('id_artikel', $req->id)->first()){
+                $artikel = ArtikelModel::where('id_artikel', $req->id)->first();
+                $artikel->id_kategori = $req->kategori;
+                $artikel->judul = $req->judul;
+                $artikel->penulis = $req->penulis;
+                $artikel->isi = $req->isi;
+                $artikel->tanggal = Carbon::now()->toDateString();
+                $artikel->waktu = Carbon::now()->toTimeString();
+                $artikel->images = $name;
+                $artikel->save();
+            }
+            else{
+                $artikel = new ArtikelModel();
+                $artikel->id_artikel = Str::random(25);
+                $artikel->id_kategori = $req->kategori;
+                $artikel->judul = $req->judul;
+                $artikel->penulis = $req->penulis;
+                $artikel->isi = $req->isi;
+                $artikel->tanggal = Carbon::now()->toDateString();
+                $artikel->waktu = Carbon::now()->toTimeString();
+                $artikel->images = $name;
+                $artikel->save();
+            }
+            if($file = $req->file('images')){
+                $file->move($path, $name);
+            }
             
             return redirect('admin/artikel');
         }
@@ -176,7 +197,7 @@ class AdminController extends Controller
         }
 
         if($req->method() == 'POST'){
-            JurusanModel::updateOrCreate(['id_jurusan' => $req->id], ['nama_jurusan' => $req->jurusan]);
+            JurusanModel::updateOrCreate(['id_jurusan' => $req->id], ['id_jurusan' => Str::random(5), 'nama_jurusan' => $req->jurusan]);
             return redirect('admin/jurusan');
         }        
 
@@ -229,21 +250,39 @@ class AdminController extends Controller
                 $name = time().'.jpg';
                 $path = public_path().'/images/siswa';
             }
-            
-            SiswaModel::updateOrCreate(['id_siswa' => $req->id],
-            [
-                'id_siswa' => Str::random(70),
-                'id_jurusan' => $req->jurusan,
-                'nama_lengkap' => $req->nama,
-                'nis' => $req->nis,
-                'jenis_kelamin' => $req->jenis_kelamin,
-                'alamat' => $req->alamat,
-                'no_hp' => $req->nomor_hp,
-                'angkatan' => $req->angkatan,
-                'images' => $name,
-                'status' => $req->status
-            ]);
+            else{
+                $name = $req->images;
+            }
 
+            $siswa = null;
+            if(SiswaModel::where('id_siswa', $req->id)->first()){
+                $siswa = SiswaModel::where('id_siswa', $req->id)->first();
+                $siswa->id_jurusan = $req->jurusan;
+                $siswa->nama_lengkap = $req->nama;
+                $siswa->nis = $req->nis;
+                $siswa->jenis_kelamin = $req->jenis_kelamin;
+                $siswa->alamat = $req->alamat;
+                $siswa->no_hp = $req->nomor_hp;
+                $siswa->angkatan = $req->angkatan;
+                $siswa->images = $name;
+                $siswa->status = $req->status;
+                $siswa->save();
+            }
+            else{
+                $siswa = new SiswaModel();
+                $siswa->id_siswa = Str::random(35);
+                $siswa->id_jurusan = $req->jurusan;
+                $siswa->nama_lengkap = $req->nama;
+                $siswa->nis = $req->nis;
+                $siswa->jenis_kelamin = $req->jenis_kelamin;
+                $siswa->alamat = $req->alamat;
+                $siswa->no_hp = $req->nomor_hp;
+                $siswa->angkatan = $req->angkatan;
+                $siswa->images = $name;
+                $siswa->status = $req->status;
+                $siswa->save();
+            }
+            
             if($req->file('images')){
                 $file->move($path, $name);
             }
@@ -301,6 +340,9 @@ class AdminController extends Controller
             $data['siswa'] = $siswa;
             $data['title'] = 'Edit Alumni';
         }
+        else{
+            $name = $req->images;
+        }
 
         if($req->method() == 'POST'){
 
@@ -312,21 +354,36 @@ class AdminController extends Controller
                 $name = time().'.jpg';
                 $path = public_path().'/images/alumni';
             }
-            
-            SiswaModel::updateOrCreate(['id_siswa' => $req->id],
-            [
-                'id_siswa' => Str::random(70),
-                'id_jurusan' => $req->jurusan,
-                'nama_lengkap' => $req->nama,
-                'nis' => $req->nis,
-                'jenis_kelamin' => $req->jenis_kelamin,
-                'alamat' => $req->alamat,
-                'no_hp' => $req->nomor_hp,
-                'angkatan' => $req->angkatan,
-                'images' => $name,
-                'status' => $req->status
-            ]);
 
+            $siswa = null;
+            if(SiswaModel::where('id_siswa', $req->id)->first()){
+                $siswa = SiswaModel::where('id_siswa', $req->id)->first();
+                $siswa->id_jurusan = $req->jurusan;
+                $siswa->nama_lengkap = $req->nama;
+                $siswa->nis = $req->nis;
+                $siswa->jenis_kelamin = $req->jenis_kelamin;
+                $siswa->alamat = $req->alamat;
+                $siswa->no_hp = $req->nomor_hp;
+                $siswa->angkatan = $req->angkatan;
+                $siswa->images = $name;
+                $siswa->status = $req->status;
+                $siswa->save();
+            }
+            else{
+                $siswa = new SiswaModel();
+                $siswa->id_siswa = Str::random(35);
+                $siswa->id_jurusan = $req->jurusan;
+                $siswa->nama_lengkap = $req->nama;
+                $siswa->nis = $req->nis;
+                $siswa->jenis_kelamin = $req->jenis_kelamin;
+                $siswa->alamat = $req->alamat;
+                $siswa->no_hp = $req->nomor_hp;
+                $siswa->angkatan = $req->angkatan;
+                $siswa->images = $name;
+                $siswa->status = $req->status;
+                $siswa->save();
+            }
+            
             if($req->file('images')){
                 $file->move($path, $name);
             }
@@ -335,6 +392,18 @@ class AdminController extends Controller
         }
 
         return view('adminAlumniForm', ['login' => $user, 'data'=>$data]);
+    }
+
+    public function detailAlumni(Request $req){
+        $user = UserModel::where('username', Session::get('username'))->get()->first();
+        $siswa = SiswaModel::join ('jurusan', 'jurusan.id_jurusan', '=', 'siswa.id_jurusan')->where('siswa.id_siswa', $req->id)->get()->first();
+
+        $data = array(
+            'title' => 'Detail Siswa',
+            'siswa' => $siswa
+        );
+
+        return view('adminAlumniDetail', ['login' => $user, 'data' => $data]);
     }
 
     public function hapusAlumni(Request $req){
@@ -382,21 +451,39 @@ class AdminController extends Controller
                 $name = time().'.jpg';
                 $path = public_path().'/images/guru';
             }
-            
-            GuruModel::updateOrCreate(['id_guru' => $req->id],
-            [
-                'id_guru' => Str::random(70),
-                'nama_lengkap' => $req->nama,
-                'nip' => $req->nip,
-                'jenis_kelamin' => $req->jenis_kelamin,
-                'golongan' => $req->golongan,
-                'no_hp' => $req->nomor_hp,
-                'tempat_lahir' => $req->tempat_lahir,
-                'mata_pelajaran' => $req->mata_pelajaran,
-                'alamat' => $req->alamat,
-                'images' => $name,
-                'status' => $req->status
-            ]);
+
+            else{
+                $name = $req->images;
+            }
+
+            $guru = null;
+            if(GuruModel::where('id_guru', $req->id_guru)->first()){
+                $guru->nama_lengkap = $req->nama;
+                $guru->nip = $req->nip;
+                $guru->jenis_kelamin = $req->jenis_kelamin;
+                $guru->golongan = $req->golongan;
+                $guru->no_hp = $req->nomor_hp;
+                $guru->tempat_lahir = $req->tempat_lahir;
+                $guru->mata_pelajaran = $req->mata_pelajaran;
+                $guru->alamat = $req->alamat;
+                $guru->images = $name;
+                $guru->status = $req->status;
+                $guru->save();
+            }else{
+                $guru = new GuruModel();
+                $guru->id_guru = Str::random(10);
+                $guru->nama_lengkap = $req->nama;
+                $guru->nip = $req->nip;
+                $guru->jenis_kelamin = $req->jenis_kelamin;
+                $guru->golongan = $req->golongan;
+                $guru->no_hp = $req->nomor_hp;
+                $guru->tempat_lahir = $req->tempat_lahir;
+                $guru->mata_pelajaran = $req->mata_pelajaran;
+                $guru->alamat = $req->alamat;
+                $guru->images = $name;
+                $guru->status = $req->status;
+                $guru->save();
+            }
 
             if($req->file('images')){
                 $file->move($path, $name);
@@ -501,18 +588,33 @@ class AdminController extends Controller
                 $name = time().'.jpg';
                 $path = public_path().'/images/user';
             }
-            
-            UserModel::updateOrCreate(['id_user' => $req->id],
-            [
-                'id_user' => Str::random(70),
-                'nama_lengkap' => $req->nama_lengkap,
-                'email' => $req->email,
-                'no_hp' => $req->no_hp,
-                'alamat' => $req->alamat,
-                'username' => $req->username,
-                'password' => $req->password,
-                'images' => $name
-            ]);
+            else{
+                $name = $req->images;
+            }
+
+            $user = null;
+            if(UserModel::where('id_user', $req->id)->first()){
+                $user->nama_lengkap = $req->nama_lengkap;
+                $user->email = $req->email;
+                $user->no_hp = $req->no_hp;
+                $user->alamat = $req->alamat;
+                $user->username = $req->username;
+                $user->password = $req->password;
+                $user->images = $name;
+                $user->save();
+            }
+            else{
+                $user = new UserModel();
+                $user->id_user = Str::random(10);
+                $user->nama_lengkap = $req->nama_lengkap;
+                $user->email = $req->email;
+                $user->no_hp = $req->no_hp;
+                $user->alamat = $req->alamat;
+                $user->username = $req->username;
+                $user->password = $req->password;
+                $user->images = $name;
+                $user->save();
+            }
 
             if($req->file('images')){
                 $file->move($path, $name);

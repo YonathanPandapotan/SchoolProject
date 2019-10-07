@@ -11,4 +11,5 @@ class JurusanModel extends Model
     public $timestamps = false;
     protected $fillable = ['id_jurusan', 'nama_jurusan'];
     protected $primaryKey = 'id_jurusan';
+    public $incrementing = false;
 }

@@ -98,6 +98,16 @@ class MainController extends Controller
         return view('dataguru', ['data' => $data]);
     }
 
+    public function detailGuru(Request $req){
+        $data = $this->template();
+
+        $guru = GuruModel::where('id_guru', $req->id)->get();
+
+        $data['guru'] = $guru;
+
+        return view('detailGuru', ['data' => $data]);
+    }
+
     public function dataAlumni(){
         $data = $this->template();
         $dataalumni = SiswaModel::where('status', 'Alumni')->get();
@@ -142,9 +152,9 @@ class MainController extends Controller
     public function detailKategori(Request $req){
 
         $data = $this->template();
-        $kategori = KategoriModel::where('id_kategori', $req->id)->get();
+        $kategori = KategoriModel::where('nama_kategori', str_replace('-', ' ', $req->nama))->get();
         // return response($kategori->nama_kategori);
-        $artikel = ArtikelModel::where('id_kategori', $req->id)->get();
+        $artikel = ArtikelModel::where('id_kategori', $kategori[0]->id_kategori)->get();
 
         $data['kategoriList'] = $kategori;
         $data['artikel'] = $artikel;
@@ -155,6 +165,10 @@ class MainController extends Controller
     public function login(Request $request){
 
         $message = array();
+
+        if($request->session()->get('login') == 'true'){
+            return redirect('/admin/home');
+        }
 
         if($request->method() == 'POST'){              
             $user = UserModel::where('email', $request->username)->where('password', md5($request->password))->get()->first();

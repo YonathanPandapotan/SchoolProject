@@ -9,4 +9,5 @@ class TentangModel extends Model
     //
     protected $table = 'tentang';
     public $timestamps = false;
+    public $incrementing = false;
 }

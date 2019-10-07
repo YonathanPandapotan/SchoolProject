@@ -26,7 +26,7 @@
 				</td>
 				<td style="vertical-align: middle"><?php echo $siswa->nis; ?></td>
 				<td style="vertical-align: middle;">
-					<a href="/siswa/detail/<?php echo $siswa->id_siswa ?>"><?php echo $siswa->nama_lengkap; ?></a>
+					<a href="/datasiswa/detail/<?php echo $siswa->id_siswa ?>"><?php echo $siswa->nama_lengkap; ?></a>
 				</td>
 				<td style="vertical-align: middle;"><?php echo $siswa->nama_jurusan; ?></td>
 				<td style="vertical-align: middle;"><?php echo $siswa->jenis_kelamin; ?></td>

@@ -32,7 +32,7 @@
 					<td><?php echo $no; ?></td>
 					<td>
 						<?php if($alumni->images) { ?> 
-						<img src="public/images/alumni/<?php echo $alumni->images; ?>" style="width: 50px;height: 50px" alt="<?php echo $alumni->judul; ?>">
+						<img src="{{asset('images/alumni').'/'.$alumni->images}}" style="width: 50px;height: 50px" alt="<?php echo $alumni->judul; ?>">
 					<?php } else { ?>
 						<img src="{{asset('images/no_user.jpg')}}" style="width: 50px;height: 50px">
 					<?php } ?>

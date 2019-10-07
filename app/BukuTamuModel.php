@@ -8,4 +8,5 @@ class BukuTamuModel extends Model
 {
     //
     protected $table = 'bukutamu';
+    public $incrementing = false;
 }

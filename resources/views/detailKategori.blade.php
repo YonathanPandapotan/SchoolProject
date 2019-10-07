@@ -16,7 +16,7 @@
 							<?php echo $artikel->waktu; ?> - <?php echo date('d/m/Y', strtotime($artikel->tanggal)); ?>
 						</div>
 						<div class="title">
-							<a href="/artikel/detail/<?php echo $artikel->id_artikel; ?>"><?php echo $artikel->judul; ?></a>
+							<a href="/artikel/detail/<?php echo $artikel->id_artikel; ?>/<?php echo Str::slug($artikel->judul); ?>"><?php echo $artikel->judul; ?></a>
 						</div>
 						<div class="text">
 							<?php echo substr(strip_tags($artikel->isi), 0, 250); ?>

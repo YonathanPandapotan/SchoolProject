@@ -30,7 +30,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Dashboard <small>Control</small></span></a>
+              <a href="/admin/home" class="site_title"><i class="fa fa-paw"></i> <span>Dashboard <small>Control</small></span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -38,8 +38,11 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                  
-                <img src="{{ asset('images/img.jpg') }}" alt="..." class="img-circle profile_img">
+                <?php if($login->images) {?>
+                  <img src="{{asset('images/user').'/'.$login->images}}" alt="<?php $login->username ?>" class="img-circle profile_img">
+                <?php } else {?>
+                  <img src="{{asset('images/no_user.jpg')}}" alt="<?php $login->username ?>" class="img-circle profile_img">
+                <?php } ?>
               </div>
               <div class="profile_info">
                 <span>Welcome, {{Session::get('nama-lengkap')}}</span>
@@ -86,7 +89,12 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ asset('images/img.jpg') }}" alt=""><?php echo $login['nama_lengkap']; ?>
+                      <?php if($login->images) {?>
+                        <img src="{{asset('images/user').'/'.$login->images}}" alt="<?php $login->username ?>">
+                      <?php } else {?>
+                        <img src="{{asset('images/no_user.jpg')}}" alt="<?php $login->username ?>">
+                      <?php } ?>
+                      <?php echo $login['nama_lengkap']; ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">

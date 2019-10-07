@@ -12,4 +12,5 @@ class ArtikelModel extends Model
     public $fillable = ['id_artikel', 'id_kategori', 'judul', 'penulis', 'isi', 'tanggal', 'waktu', 'images'];
     protected $primaryKey = 'id_artikel';
     public $timestamps = false;
+    public $incrementing = false;
 }

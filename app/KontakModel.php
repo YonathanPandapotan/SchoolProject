@@ -8,4 +8,5 @@ class KontakModel extends Model
 {
     //
     protected $table = 'kontak';
+    public $incrementing = false;
 }
